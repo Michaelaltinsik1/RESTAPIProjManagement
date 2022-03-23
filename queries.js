@@ -10,7 +10,7 @@ const pool = new pg.Pool({
 });
 const getProjects = (request, response) => {
 //if(Object.keys(request.body).length === 0){
-    pool.query("SELECT * FROM projects ORDER BY id DESC", (error, results) => {
+    pool.query("SELECT * FROM projects ORDER BY id ASC", (error, results) => {
         if (error) {
             throw error;
         }
@@ -27,8 +27,7 @@ const getProjectById = (request, response) => {
          response.status(200).json(results.rows);
     });
 };
-const createProject = (request, response) => {
-   
+const createProject = (request, response) => {   
     const { ProjectName, ProjectBudget, ProjectLeaderId } = request.body;
     pool.query("INSERT INTO projects (project_name, project_budget,project_leader_id) VALUES ($1, $2, $3)", [ProjectName, ProjectBudget, ProjectLeaderId], (error, results) => {
         if (error) {
@@ -40,8 +39,8 @@ const createProject = (request, response) => {
 };
 const updateProject = (request, response) => {
     const id = parseInt(request.params.id);
-    const { name, email } = request.body;
-    pool.query("UPDATE users SET name = $1, email = $2 WHERE id = $3",[name, email, id], (error, results) => {
+    const { ProjectName, ProjectBudget, ProjectLeaderId } = request.body;
+    pool.query("UPDATE projects SET project_name = $1, project_budget = $2, project_leader_id = $3 WHERE id = $4",[ProjectName, ProjectBudget, ProjectLeaderId,id], (error, results) => {
         if (error) {
             throw error;
         }

@@ -7,15 +7,15 @@ app.use( express.urlencoded({extended: true,}));
 app.get("/", (request, response) => {
     response.json({ info: "Node.js, Express, and Postgres API" });
 });
-app.get('/project', getProjects)
+app.get('/projects', getProjects)
 
-app.get('/project/:id', getProjectById)
+app.get('/projects/:id', getProjectById)
 
-app.post('/project', createProject)
+app.post('/projects', createProject)
 
-// app.put('/project/:id', updateProject)
+app.put('/projects/:id', updateProject)
 
-// app.delete('/project/:id', deleteProject)
+app.delete('/projects/:id', deleteProject)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`);
