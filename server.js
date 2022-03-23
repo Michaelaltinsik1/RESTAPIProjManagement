@@ -1,7 +1,7 @@
 import express from 'express';
 import {getProjects, getProjectById, createProject, updateProject, deleteProject} from './queries.js';
 const app = express();
-const port = 3030;
+const port = 3031;
 app.use(express.json());
 app.use( express.urlencoded({extended: true,}));
 app.get("/", (request, response) => {
@@ -9,9 +9,9 @@ app.get("/", (request, response) => {
 });
 app.get('/project', getProjects)
 
-// app.get('/project/:id', getProjectById)
+app.get('/project/:id', getProjectById)
 
-// app.post('/project', createProject)
+app.post('/project', createProject)
 
 // app.put('/project/:id', updateProject)
 
